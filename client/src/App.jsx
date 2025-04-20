@@ -12,10 +12,15 @@ import ProductDetails from './pages/ProductDetails.jsx'
 import Cart from './pages/Cart.jsx'
 import AddAddress from './pages/AddAddress.jsx'
 import MyOrders from './pages/MyOrders.jsx'
+import SellerLogin from './components/seller/SellerLogin.jsx'
+import SellerLayout from './pages/seller/SellerLayout.jsx'
+import AddProducts from './pages/seller/AddProducts.jsx'
+import ProductList from './pages/seller/ProductList.jsx'
+import Orders from './pages/seller/Orders.jsx'
 const App = () => {
 
   const isSellerPath = useLocation().pathname.includes('/seller');
-  const {showUserLogin} = useAppContext()
+  const {showUserLogin, isSeller} = useAppContext()
   return (
     <div>
 
@@ -24,7 +29,7 @@ const App = () => {
       <Toaster
         position="bottom-center"
         toastOptions={{
-          duration: 4000,
+          duration: 500,
           style: {
             background: '#363636',
             color: '#fff',
@@ -42,6 +47,12 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/add-address" element={<AddAddress />} />
         <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/seller" element={isSeller ? <SellerLayout/> : <SellerLogin />} />
+        <Route path="/sellerlayout"element={<SellerLayout/>}/>
+        <Route index element={isSeller ? <AddProducts/> : null}/>
+        <Route path='/product-list' element={<ProductList/>}/>
+        <Route path='orders' element={<Orders/>}/>
+
       </Routes>
       
 
