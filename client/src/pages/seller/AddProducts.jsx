@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import {assets, categories} from "../../assets/assets"
 
 const AddProducts = () => {
-    const [files, set] = useState([])
+    const [files, setFiles] = useState([])
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState('')
-    const [offerPrice, setOfferPrice] = ('')
+    const [offerPrice, setOfferPrice] = useState('')
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -83,7 +83,7 @@ const AddProducts = () => {
                         id="offer-price" type="number" placeholder="0" className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40" required />
                     </div>
                 </div>
-                <button className="px-8 py-2.5 bg-indigo-500 text-white font-medium rounded">ADD</button>
+                <button className="px-8 py-2.5 bg-primary text-white font-medium rounded cursor-pointer">ADD</button>
             </form>
         </div>
   )

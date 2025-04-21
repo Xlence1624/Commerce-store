@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 import { Link, Outlet } from 'react-router-dom';
 
+
 const SellerLayout = () => {
     
     const {setIsSeller} = useAppContext();
@@ -43,7 +44,7 @@ const SellerLayout = () => {
                             className={
                                 ({isActive}) =>
                                 `flex items-center py-3 px-4 gap-3 hover:text-primary 
-                                ${isActive ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-primary text-primary"
+                                ${isActive ? "border-r-4 md:border-r-[6px] bg-primary/10 border-primary text-primary"
                                     : "hover:bg-primary/10 border-white"
                                 }`
                             }
@@ -55,6 +56,7 @@ const SellerLayout = () => {
                 </div>
 
                 <Outlet/>
+                
 
               </div>
             </>
