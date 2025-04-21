@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { assets } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
+import { useRoutes } from "react-router-dom";
 
 // input field
 
@@ -11,38 +14,35 @@ const InputField = ({ type, placeholder, name, handleChange, address }) => (
     placeholder={placeholder}
     onChange={handleChange}
     name={name}
-    value={address[name]}
-    
     required
   />
 );
 
+
 const AddAddress = () => {
+  const { addressRef, updateBio } = useAppContext();
+  const [address, setAddress] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    country: "",
+    phone: "",
+  });
 
-const [address, setAddress] = useState({
-  firstName: '',
-  lastName: '',
-  email: '',
-  street: '',
-  city: '',
-state: '',
-zipcode: '',
-country: '',
-phone: '',
-}
-
-
-
-);
-
-const handleChange = (e) => {
-  const {name, value} = e.target;
-  setAddress((prevAddress) => ({...prevAddress, [name]: value,}));
-  
-}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    updateBio(name, value);
+    // setAddress((prevAddress) => ({...prevAddress, [name]: value,}));
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    toast.success('Profile updated')
+    history.back()
   };
 
   return (
@@ -54,81 +54,69 @@ const handleChange = (e) => {
       <div className="flex flex-col-reverse md:flex-row justify-between mt-10">
         <div className="flex-1 max-w-md">
           <form onSubmit={onSubmitHandler} className="space-y-3 mt-6 text-sm">
-          <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <InputField
+                handleChange={handleChange}
+                name="firstName"
+                type="text"
+                placeholder="First Name"
+              />
+              <InputField
+                handleChange={handleChange}
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+              />
+            </div>
+
             <InputField
               handleChange={handleChange}
-              address={address}
-              name="firstName"
-              type="text"
-              placeholder="First Name"
-            />
-  <InputField
-              handleChange={handleChange}
-              address={address}
-              name="lastName"
-              type="text"
-              placeholder="Last Name"
-            />
-          </div>
-
-           <InputField
-              handleChange={handleChange}
-              address={address}
               name="email"
               type="email"
               placeholder="email"
             />
 
-             <InputField
+            <InputField
               handleChange={handleChange}
-              address={address}
               name="street"
               type="text"
               placeholder="street"
             />
 
             <div className="grid grid-cols-2 gap-4">
-             <InputField
-              handleChange={handleChange}
-              address={address}
-              name="city"
-              type="text"
-              placeholder="City"
-            />
+              <InputField
+                handleChange={handleChange}
+                name="city"
+                type="text"
+                placeholder="City"
+              />
 
-             <InputField
-              handleChange={handleChange}
-              address={address}
-              name="state"
-              type="text"
-              placeholder="state"
-            />
-            
+              <InputField
+                handleChange={handleChange}
+                name="state"
+                type="text"
+                placeholder="state"
+              />
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <InputField
+                handleChange={handleChange}
+                name="zipcode"
+                type="number"
+                placeholder="zipcode"
+              />
 
- <div className="grid grid-cols-2 gap-4">
-             <InputField
-              handleChange={handleChange}
-              address={address}
-              name="zipcode"
-              type="number"
-              placeholder="zipcode"
-            />
-
-             <InputField
-              handleChange={handleChange}
-              address={address}
-              name="country"
-              type="text"
-              placeholder="Country"
-            />
-            
+              <InputField
+                handleChange={handleChange}
+                name="country"
+                type="text"
+                placeholder="Country"
+              />
             </div>
 
             <InputField
               handleChange={handleChange}
-              address={address}
               name="phone"
               type="text"
               placeholder="Phone"
